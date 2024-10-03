@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+.gitattributes
+
+output/*
+
+*.DS_store
