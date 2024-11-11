@@ -392,7 +392,7 @@ for (ii in c(1,3)) {
                                    aes(x = plot_var))+
     geom_line(aes(y = 100*prob_inoc_infect), color = "red") +
     geom_line(aes(y = inoc_50*prop_const), color = "blue") +
-    scale_y_continuous(name = "Risk of infection per challenge",
+    scale_y_continuous(name = "Risk of infection per challenge (%)",
                        sec.axis = sec_axis(~./prop_const, name = "Challenges to get >50% infected"),
                        limits = c(NA, ifelse(pred_var_name == 'CD19_fracCCR5',
                                              30, 60)))+ 
