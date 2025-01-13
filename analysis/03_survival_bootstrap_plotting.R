@@ -220,13 +220,21 @@ for (ii in c(1,3)) {
     geom_bar(stat = "identity") + geom_errorbar(aes(ymin = frac_infect_CI_low,
                                                     ymax = frac_infect_CI_high)) + 
     geom_line(data = Expect_infect_df,
-                           aes(x = plot_var, 
-                               y = prob_infect_by_wk_8),
-                           inherit.aes = FALSE) + theme_classic() +
+              aes(x = plot_var, y = prob_infect_by_wk_8),
+              inherit.aes = FALSE, linetype = 'dashed') + 
+    geom_point(data = Animal_wFull_infection_data_df, 
+               aes(y = infect_cens*1, x = BM_CD19_CCR5_KO_mean, color = Arm,
+                   shape = factor(infect_cens))) + 
+    #plotting if animals were infected (1) or not infected (0)
+    Surv_arm_palette + scale_shape_manual(values = c(21,19)) + theme_classic() +
     scale_y_continuous(labels = percent) +
-    labs(y='% HIV-infected', title='Probability of infection within 8 challenges',
+    scale_y_continuous(name = '% HIV-infected',
+                       sec.axis = sec_axis(~., breaks = c(0,1),
+                                           labels = c("uninfected", "infected")))+ 
+    labs(title='Probability of infection within 8 challenges',
          x = pred_var_axis_name) + 
-    theme(plot.title = element_text(hjust = 0.5, size = 10))
+    theme(plot.title = element_text(hjust = 0.5, size = 10),
+          legend.position = 'none')
   
   print(fit_quality_plot)
   
